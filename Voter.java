@@ -17,7 +17,15 @@ public class Voter {
 		// 100X25 rectangle with 5X5 districts each having 25 voters
 		// 1 2D array
 		Voter [] [] grid = new Voter [100][25];
+		Voter [] [] grid = new Voter [100][25];
+		int row;
+		int col;
 		
+		for(row = 0, row < 4, row + 5)
+		{
+			for(col = 0, col < 4, col + 5)
+				
+		}
 	
 	
 		
