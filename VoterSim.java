@@ -10,4 +10,8 @@ public class VoterSim {
 	public static Voter [] [] grid = new Voter [HEIGHT][WIDTH];
 	public static Random rnd = new Random();
 	
+	int p;
+	
+	p = (SPREAD + nD)/(2(SPREAD)+ nR + nD);
+	
 }
