@@ -10,6 +10,7 @@ public class Voter {
 			public static final int REPUBLICAN = 1;
 			
 			// abstract method int getAffiliation
+	abstract public void getAffiliation;
 			
 	public static void main(String[] args) {
 		
