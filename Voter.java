@@ -26,13 +26,18 @@ public class Voter {
 		for (outrow = 0, outrow < 20, outrow++)
 		{
 		
-			for(row = 0, row < 4, row + 5)
+			for(row = 0, row < 4, row++)
 			{
-				for(col = 0, col < 4, col + 5)
+				for(col = 0, col < 4, col++)
 				{
-				
+					
 				}
 			}
+			for(outcol = 0; outcol < 4, outcol++)
+			{
+				
+			}
+		}
 	
 	
 		
