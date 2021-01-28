@@ -25,7 +25,6 @@ public class Voter {
 		
 		for (outrow = 0, outrow < 20, outrow++)
 		{
-		
 			for(row = 0, row < 4, row++)
 			{
 				for(col = 0, col < 4, col++)
