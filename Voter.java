@@ -6,10 +6,10 @@
 public class Voter {
 
 	// need two public constants democrat and republican
-			public static final int DEMOCRAT = 0;
-			public static final int REPUBLICAN = 1;
+	public static final int DEMOCRAT = 0;
+	public static final int REPUBLICAN = 1;
 			
-			// abstract method int getAffiliation
+	// abstract method int getAffiliation
 	abstract public void getAffiliation;
 			
 	public static void main(String[] args) {
