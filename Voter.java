@@ -20,12 +20,19 @@ public class Voter {
 		Voter [] [] grid = new Voter [100][25];
 		int row;
 		int col;
+		int outrow;
+		int outcol;
 		
-		for(row = 0, row < 4, row + 5)
+		for (outrow = 0, outrow < 20, outrow++)
 		{
-			for(col = 0, col < 4, col + 5)
+		
+			for(row = 0, row < 4, row + 5)
+			{
+				for(col = 0, col < 4, col + 5)
+				{
 				
-		}
+				}
+			}
 	
 	
 		
