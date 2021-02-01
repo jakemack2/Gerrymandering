@@ -189,12 +189,12 @@ public abstract class VoterSim {
 		double randVal = rnd.nextDouble();
 		if(randVal < form)
 		{
-			state[randRow][randCol] = DEMOCRAT; // Jake, help me out here
+			return REPUBLICAN;
 
 		}
 		else
 		{
-			state[randRow][randCol] = REPUBLICAN; // Jake help me out here
+			return DEMOCRAT;
 		}
 		
 		printState();
