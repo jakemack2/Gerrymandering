@@ -1,8 +1,12 @@
 import java.util.Random;
 
-public abstract class VoterSim {
+public abstract class Voter {
 
-	public static final int DEMOCRAT = 0;
+	// Patrick Ekeu
+	// Project 1 Voter
+	// February 1, 2021
+
+	public static final int DEMOCRAT = 0; // private variables
 	public static final int REPUBLICAN = 1;
 	public static final int PRECINCTSIZE = 5;
 	public static final int WIDTH = PRECINCTSIZE*20;
@@ -14,7 +18,8 @@ public abstract class VoterSim {
 	public static Voter [] [] state = new Voter [HEIGHT][WIDTH];
 	public static Random rnd = new Random();
 
-	public static int count(int rStart, int rEnd, int cStart, int cEnd, int type)
+
+	public static int count(int rStart, int rEnd, int cStart, int cEnd, int type) // method that counts the amount of Democrats and Republicans 
 	{
 		nD = 0;
 		nR = 0;
@@ -43,8 +48,8 @@ public abstract class VoterSim {
 			return nR;
 		}
 	}
-	
-	public static int count(int rStart, int rEnd, int cStart, int cEnd)
+
+	public static int count(int rStart, int rEnd, int cStart, int cEnd) // method that counts the total amount of voters in a specified area
 	{
 		int total = 0;
 		nD = 0;
@@ -61,10 +66,40 @@ public abstract class VoterSim {
 		}
 		total = nD + nR;
 		return total;
-		
+
 	}
 
-	public static Voter[][] initState()
+	public static int districtAffiliation(int startr, int startc)
+	{
+		nD = 0;
+		nR = 0;
+		startr = 0;
+		startc = 0;
+
+		for(int r = startr; r < startr + 5; r++)
+		{
+			for(int c = startc; c < startc + 5; c++)
+			{
+				state[r][c].getAffiliation();
+				if(state[r][c].getAffiliation() == DEMOCRAT)
+				{
+					nD++;
+				}
+				else
+					nR++;
+			}
+		}
+
+		if (nR > nD)
+		{
+			return Voter.REPUBLICAN;
+		}
+		else
+			return Voter.DEMOCRAT;
+	}
+
+
+	public static Voter[][] initState() // initializes the state with null values
 	{
 		for(int outrow = 0; outrow < 20; outrow++)
 		{			
@@ -83,7 +118,7 @@ public abstract class VoterSim {
 		return state;
 	}
 
-	public static void printState()
+	public static void printState() // Prints out the state in the console
 	{
 		for(int k = 0; k < 20; k++)
 		{
@@ -105,100 +140,144 @@ public abstract class VoterSim {
 	}
 
 
-	public abstract int getAffiliation();
+	public abstract int getAffiliation(); // abstract method
 	{
 
 	}
 
-	
 
 	public static void main(String[] args) 
 	{
-
-		initState();
-		
-		int democrat;
-		int republican;
-		int type;
+		initState(); 
 		int randRow;
 		int randCol;
 
-		do 
+		do // checks for 8 surrounding locations from the random spot in the state
 		{
-			randRow = rnd.nextInt(100) + 1;
-			randCol = rnd.nextInt(25) + 1;
-			if((randRow == 0) || (randCol == 0) || (randRow == HEIGHT + 1) || (randCol == WIDTH +1))
-			{
-				return;
-			}
+			randRow = rnd.nextInt(HEIGHT);
+			randCol = rnd.nextInt(WIDTH);
+			state[randRow][randCol] = new Democrat();
 			if(state[randRow][randCol] == null)
 			{
-				if(state[randRow - 1][randCol - 1].getAffiliation() == nD)
-					nD++;
+				if((randRow == 0) || (randCol == 0))
+					continue;
 				else
-					nR++;
-				if(state[randRow -1][randCol].getAffiliation() == DEMOCRAT)
-					nD++;
-				else
-					nR++;
-				if(state[randRow -1][randCol+1].getAffiliation() == DEMOCRAT)
-					nD++;
-				else
-					nR++;
-				if(state[randRow][randCol-1].getAffiliation() == DEMOCRAT)
-					nD++;
-				else
-					nR++;
-				if(state[randRow +1][randCol - 1].getAffiliation() == DEMOCRAT)
-					nD++;
-				else
-					nR++;
-				if(state[randRow +1][randCol].getAffiliation() == DEMOCRAT)
-					nD++;
-				else
-					nR++;
-				if(state[randRow +1][randCol+1].getAffiliation() == DEMOCRAT)
-					nD++;
-				else
-					nR++;
-				if(state[randRow][randCol + 1].getAffiliation() == DEMOCRAT)
-					nD++;
-				else
-					nR++;
-				
-				int newRow;
-				int newCol;
-				newRow = randRow;
-				newCol = randCol;
-			
-				if(nR > nD)
 				{
-					state[newRow][newCol] = REPUBLICAN; // Can you try to make this a republican?
+					if(state[randRow - 1][randCol - 1].getAffiliation() == DEMOCRAT)
+					{
+						nD++;
+					}
+					else
+						nR++;
 				}
-				
-				if(nD > nR)
+				if(randRow == 0)
+					continue;
+				else
 				{
-					state[newRow][newCol] = DEMOCRAT; // Can you try to make this a democrat?
+					if(state[randRow - 1][randCol].getAffiliation() == DEMOCRAT)
+					{
+						nD++;
+					}
+					else
+						nR++;
 				}
-			}	
-			
-		} while(!(state[randRow][randCol] == null));
-		
-		double form;
-		form = (SPREAD + nD)/(2.0 * SPREAD)+ nR + nD;
-		double randVal = rnd.nextDouble();
-		if(randVal < form)
-		{
-			return REPUBLICAN;
+				if((randRow == 0) || (randCol == 100))
+					continue;
+				else
+				{
+					if(state[randRow - 1][randCol + 1].getAffiliation() == DEMOCRAT)
+					{
+						nD++;
+					}
+					else
+						nR++;
+				}
+				if(randCol == 0)
+					continue;
+				else
+				{
+					if(state[randRow][randCol - 1].getAffiliation() == DEMOCRAT)
+					{
+						nD++;
+					}
+					else
+						nR++;
+				}
+				if((randRow == 25) || (randCol == 0))
+					continue;
+				else
+				{
 
-		}
-		else
+					if(state[randRow + 1][randCol - 1].getAffiliation() == DEMOCRAT)
+					{
+
+						nD++;
+					}
+					else
+						nR++;
+				}
+				if(randRow == 25)
+					continue;
+				else
+				{
+					if(state[randRow + 1][randCol].getAffiliation() == DEMOCRAT)
+					{
+						nD++;
+					}
+					else
+						nR++;
+				}
+				if((randRow == 100) || (randCol == 100))
+					continue;
+				else
+				{
+					if(state[randRow + 1][randCol + 1].getAffiliation() == DEMOCRAT)
+					{
+						nD++;
+					}
+					else
+						nR++;
+				}
+				if(randCol == 100)
+					continue;
+				else
+				{
+					if(state[randRow][randCol + 1].getAffiliation() == DEMOCRAT)
+					{
+						nD++;
+					}
+					else
+						nR++;
+				}
+
+				double form;
+				form = (SPREAD + nD)/(2.0 * SPREAD)+ nR + nD;
+				double randVal = rnd.nextDouble();
+
+				if(form >= randVal)
+				{
+					state[randRow][randCol] = new Democrat(); 
+
+				}
+				else
+				{
+					state[randRow][randCol] = new Republican(); 
+				}
+
+			} 
+
+		}	while ((state[randRow + 1][randCol + 1] == null) || (state[randRow][randCol + 1] == null) || (state[randRow][randCol - 1] == null) || (state[randRow - 1][randCol + 1] == null) ||
+				(state[randRow - 1][randCol - 1] == null) || (state[randRow][randCol + 1] == null) || (state[randRow + 1][randCol - 1] == null));
+
+
+		int numVoters = 0;
+		while(numVoters < 2500)
 		{
-			return DEMOCRAT;
+			numVoters++;
 		}
-		
+
 		printState();
-		
+
 		System.out.println("Total Number of Voters: " + count(0,100,0,25));
 		System.out.println("Total Number of Democrats: " + count(0,100,0,25,0));
 		System.out.println("Total Number of Republicans: " + count(0,100,0,25,1));
@@ -207,13 +286,6 @@ public abstract class VoterSim {
 		System.out.println("There are " +  (( WIDTH * HEIGHT) / Math.pow(PRECINCTSIZE, 2)) + " districts");
 		System.out.println("% of districts voted Democratic");
 		System.out.println("% of districts voted Republican");
-		
-		
 	}
-	
-	
-	
-	
-
 }
 
